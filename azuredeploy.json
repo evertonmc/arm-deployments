@@ -74,7 +74,7 @@
     "webServerNicName": "[concat(variables('dnsNamePrefix'),'-wsnic')]",
     "webServerNsgName": "[concat(variables('dnsNamePrefix'),'-wsnsg')]",
     "publicIPAddressNameWebServer": "[concat(variables('dnsNamePrefix'),'-wspip')]",
-    "xServerName": "[concat(variables('dnsNamePrefix'),'-xserver')]",
+    "xServerName": "[concat(variables('dnsNamePrefix'),'-xs')]",
     "xServerSize": "[parameters('xServerVMSize')]",
     "xServerNicName": "[concat(variables('dnsNamePrefix'),'-xsnic')]",
     "xServerNsgName": "[concat(variables('dnsNamePrefix'),'-xsnsg')]",
