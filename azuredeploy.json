@@ -168,7 +168,7 @@
           {
             "name": "ipconfig-ws",
             "properties": {
-              "privateIPAddress": "10.1.0.7",
+              "privateIPAddress": "10.0.0.7",
               "privateIPAllocationMethod": "Static",
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressNameWebServer'))]"
@@ -201,7 +201,7 @@
           {
             "name": "ipconfig-xs",
             "properties": {
-              "privateIPAddress": "10.1.0.5",
+              "privateIPAddress": "10.0.0.5",
               "privateIPAllocationMethod": "Static",
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressNameXServer'))]"
