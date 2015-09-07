@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccountName": {
+      "value": "sundevstorage"
+    },
+    "adminUsername": {
+      "value": "sunrise"
+    },
+    "adminPassword": {
+      "value": ""
+    },
+    "dnsNamePrefix": {
+      "value": "mgidev06"
+    },
+    "xServerVMSize": {
+      "value": "Standard_A1"
+    },
+    "webServerVMSize": {
+      "value": "Standard_A1"
+    }
+  }
+}
