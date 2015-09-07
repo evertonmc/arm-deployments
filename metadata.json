@@ -1,0 +1,7 @@
+{
+  "itemDisplayName": "Backend + xServer",
+  "description": "Deploys 2 VMs for MW and xServer. This template also deploys a Storage Account, Virtual Network, Public IP addresses and a Network Interface.",
+  "summary": "Deploys 2 VMs for MW and xServer",
+  "githubUsername": "evertonmc",
+  "dateUpdated": "2015-09-07"
+}
