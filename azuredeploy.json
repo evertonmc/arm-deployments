@@ -28,7 +28,7 @@
     },
     "xServerVMSize": {
       "type": "string",
-      "defaultValue": "Standard_A3",
+      "defaultValue": "Standard_A1",
       "allowedValues": [
         "Standard_A0",
         "Standard_A1",
@@ -42,7 +42,7 @@
     },
     "webServerVMSize": {
       "type": "string",
-      "defaultValue": "Standard_A2",
+      "defaultValue": "Standard_A1",
       "allowedValues": [
         "Standard_A0",
         "Standard_A1",
@@ -57,6 +57,7 @@
   },
   "variables": {
     "imagePublisher": "MicrosoftWindowsServer",
+    "dnsNamePrefix": "[parameters('dnsNamePrefix')]",
     "imageOffer": "WindowsServer",
     "OSDiskName": "osdiskforwindowssimple",
     "dscConfigurationFunction": "SunDevWebServerConf.ps1\\SunDevWebServerConf",
@@ -69,12 +70,12 @@
     "publicIPAddressType": "Dynamic",
     "webServerExtensionName": "[concat(variables('dnsNamePrefix'),'-wsext')]",
     "webServerName": "[concat(variables('dnsNamePrefix'),'-web')]",
-    "webServerSize": "[variables('webServerVMSize')]",
+    "webServerSize": "[parameters('webServerVMSize')]",
     "webServerNicName": "[concat(variables('dnsNamePrefix'),'-wsnic')]",
     "webServerNsgName": "[concat(variables('dnsNamePrefix'),'-wsnsg')]",
     "publicIPAddressNameWebServer": "[concat(variables('dnsNamePrefix'),'-wspip')]",
     "xServerName": "[concat(variables('dnsNamePrefix'),'-xserver')]",
-    "xServerSize": "[variables('xServerVMSize')]",
+    "xServerSize": "[parameters('xServerVMSize')]",
     "xServerNicName": "[concat(variables('dnsNamePrefix'),'-xsnic')]",
     "xServerNsgName": "[concat(variables('dnsNamePrefix'),'-xsnsg')]",
     "publicIPAddressNameXServer": "[concat(variables('dnsNamePrefix'),'-xspip')]",
@@ -107,7 +108,7 @@
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('webServerName')]"
+          "domainNameLabel": "[variables('webServerName')]"
         }
       }
     },
@@ -122,7 +123,7 @@
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('xServerName')]"
+          "domainNameLabel": "[variables('xServerName')]"
         }
       }
     },
@@ -463,7 +464,7 @@
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('webServerName'))]"
       ],
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "name": "[concat(variables('webServerName'), '/', variables('webServerExtensionName'))]",
       "tags": {
         "displayName": "webServerDSC"
