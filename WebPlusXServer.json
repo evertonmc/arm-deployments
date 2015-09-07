@@ -68,7 +68,6 @@
     "vmStorageAccountContainerName": "vhds",
     "publicIPAddressType": "Dynamic",
     "webServerExtensionName": "[concat(variables('dnsNamePrefix'),'-wsext')]",
-    //
     "webServerName": "[concat(variables('dnsNamePrefix'),'-web')]",
     "webServerSize": "[variables('webServerVMSize')]",
     "webServerNicName": "[concat(variables('dnsNamePrefix'),'-wsnic')]",
@@ -79,14 +78,12 @@
     "xServerNicName": "[concat(variables('dnsNamePrefix'),'-xsnic')]",
     "xServerNsgName": "[concat(variables('dnsNamePrefix'),'-xsnsg')]",
     "publicIPAddressNameXServer": "[concat(variables('dnsNamePrefix'),'-xspip')]",
-    //
     "virtualNetworkName": "[concat(variables('dnsNamePrefix'),'-vnet')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',concat(variables('dnsNamePrefix'),'-vnet'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
 
   },
   "resources": [
-    /// StorageAccount
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[parameters('storageAccountName')]",
@@ -99,7 +96,6 @@
         "accountType": "[variables('storageAccountType')]"
       }
     },
-    /// publicIPAddressWebServer
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/publicIPAddresses",
@@ -115,7 +111,6 @@
         }
       }
     },
-    /// publicIPAddressXServer
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/publicIPAddresses",
@@ -131,7 +126,6 @@
         }
       }
     },
-    /// VirtualNetwork
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/virtualNetworks",
@@ -156,7 +150,6 @@
         ]
       }
     },
-    /// webServerNic
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
@@ -190,7 +183,6 @@
         }
       }
     },
-    /// xServerNic
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
@@ -224,7 +216,6 @@
         }
       }
     },
-    /// webServerNsg
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkSecurityGroups",
@@ -277,7 +268,6 @@
         ]
       }
     },
-    /// xServerNsg
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkSecurityGroups",
@@ -370,7 +360,6 @@
 
       }
     },
-    /// webServerVM
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Compute/virtualMachines",
@@ -423,7 +412,6 @@
         }
       }
     },
-    /// xServerVM
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Compute/virtualMachines",
@@ -470,7 +458,6 @@
         }
       }
     },
-    /// webServerDSC
     {
       "apiVersion": "2015-05-01-preview",
       "dependsOn": [
