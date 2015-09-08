@@ -53,7 +53,21 @@
       "metadata": {
         "description": "VM Size for WebServer"
       }
-    }
+    },
+        "modulesUrl": {
+            "type": "string",
+            "defaultValue": "https://github.com/evertonmc/armdeployments/blob/master/SunDevWebServerConf.ps1.zip",
+            "metadata": {
+                "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
+            }
+        },
+        "configurationFunction": {
+            "type": "string",
+            "defaultValue": "SunDevWebServerConf.ps1\\SunDevWebServerConf",
+            "metadata": {
+                "description": "DSC configuration function to call"
+            }
+        }
   },
   "variables": {
     "imagePublisher": "MicrosoftWindowsServer",
@@ -81,8 +95,8 @@
     "publicIPAddressNameXServer": "[concat(variables('dnsNamePrefix'),'-xspip')]",
     "virtualNetworkName": "[concat(variables('dnsNamePrefix'),'-vnet')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',concat(variables('dnsNamePrefix'),'-vnet'))]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
-
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+    "vmExtensionName": "dscExtension"
   },
   "resources": [
     {
@@ -458,6 +472,27 @@
           ]
         }
       }
-    }
+    },
+           {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(variables('webServerName'),'/', variables('vmExtensionName'))]",
+            "apiVersion": "2015-05-01-preview",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "1.9",
+                "settings": {
+                    "ModulesUrl": "[parameters('modulesUrl')]",
+                    "SasToken": "",
+                    "ConfigurationFunction": "[parameters('configurationFunction')]",
+                    "Properties": {
+                        "MachineName": "[variables('webServerName')]"
+                    }
+                },
+                "protectedSettings": null
+            }
+        }
+ 
   ]
 }
